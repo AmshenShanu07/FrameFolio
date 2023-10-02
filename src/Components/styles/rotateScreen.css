@@ -18,10 +18,16 @@
   right: 10px;
 }
 
+.info-btn-con {
+  position: absolute;
+  bottom: 12px;
+  right: 10px;
+}
+
 .settings-btn-con {
   position: absolute;
   top: 12px;
-  left: 10px;
+  right: 10px;
 }
 
 .full-screen-info {
@@ -115,6 +121,15 @@
   font-size: 16px;
   margin: 0;
 }
+
+.settings_popup {
+  color: black;
+}
+
+.info_list {
+  font-size: 20px;
+}
+
 
 @keyframes swipe-animation {
   0% {

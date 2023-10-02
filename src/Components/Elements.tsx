@@ -1,20 +1,26 @@
-import { useEffect, useLayoutEffect, useState } from "react";
 import "./styles/rotateScreen.css";
+import { useEffect, useLayoutEffect, useState } from "react";
 
-import { Avatar, IconButton } from "@mui/material";
+import {
+  Avatar,
+  IconButton,
+} from "@mui/material";
+
+import { signInWithPopup } from "firebase/auth";
+import HelpIcon from '@mui/icons-material/Help';
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 
-
-import SwipeInfo from './SwipeInfo';
-import FullScreenToolTip from './FullScreenToolTip';
-import { useGlobalStore } from '../Utils/globalStore';
-import { signInWithPopup } from 'firebase/auth';
-import { auth, authProvider } from '../Utils/helpers/firebase';
-import { useAuth } from '../Utils/userStore';
-import LoadingScreen from './LoadingScreen';
+import Info from './Info';
+import SwipeInfo from "./SwipeInfo";
+import { useAuth } from "../Utils/userStore";
+import LoadingScreen from "./LoadingScreen";
+import FullScreenToolTip from "./FullScreenToolTip";
+import { useGlobalStore } from "../Utils/globalStore";
+import { auth, authProvider } from "../Utils/helpers/firebase";
 
 const RotateScreen = () => {
   const [show, setShow] = useState<boolean>(true);
+  const [infoOpen, setInfoOpen] = useState<boolean>(false);
 
   const { isMobile } = useGlobalStore();
   const { logInUser, userDetail, isLoggedIn, decodeToken } = useAuth();
@@ -24,7 +30,10 @@ const RotateScreen = () => {
     else setShow(false);
   };
 
-  const toggleFullscreen = () => {
+  const toggleFullscreen = (e:any) => {
+    e.preventDefault();
+    e.stopPropagation();
+
     if (document.fullscreenElement) {
       document.exitFullscreen();
     } else {
@@ -34,16 +43,30 @@ const RotateScreen = () => {
     }
   };
 
-  const handleLogin = (e:any) => {
+  const handleLogin = (e: any) => {
     e.preventDefault();
-    signInWithPopup(auth,authProvider).then((data)=>{
+    e.stopPropagation();
 
-      //@ts-ignore
-      const token:string = data.user.accessToken;
-      logInUser(token);
-    }).catch((e)=>console.log(e))
+    if (isLoggedIn) {
+      setInfoOpen(true);
+      return;
+    }
+
+    signInWithPopup(auth, authProvider)
+      .then((data) => {
+        //@ts-ignore
+        const token: string = data.user.accessToken;
+        logInUser(token);
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const handleHelpClick = (e:any) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setInfoOpen(true);
   }
-
 
   useEffect(() => {
     checkOriantation();
@@ -57,9 +80,10 @@ const RotateScreen = () => {
     };
   }, []);
 
-  useLayoutEffect(()=>{
+  useLayoutEffect(() => {
     decodeToken();
-  },[])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="screen-controler">
@@ -69,29 +93,37 @@ const RotateScreen = () => {
         </div>
       ) : (
         <>
-        <LoadingScreen/>
+          <LoadingScreen/>
           <div className="fullscreen-btn-con">
             <IconButton onClick={toggleFullscreen}>
               <FullscreenIcon sx={{ color: "#fff" }} />
             </IconButton>
           </div>
-
-        <div className='profile_menu' >
-          <Avatar alt='G' color='#3277a8' src={userDetail?.image} >G</Avatar>
-          <div className='profile-name-container'>
-            <p>{userDetail?.name || 'Guest User'}</p>
-            {isLoggedIn?
-            <small>{userDetail?.email}</small>:
-            <button onClick={handleLogin} >login</button>}
-            
+          <div className="info-btn-con">
+            <IconButton onClick={handleHelpClick}>
+              <HelpIcon sx={{ color: "#fff" }} />
+            </IconButton>
           </div>
-        </div>
 
-          <FullScreenToolTip/>
-          {isMobile && <SwipeInfo/>}
+          <div className="profile_menu" onClick={handleLogin}>
+            <Avatar alt="G" color="#3277a8" src={userDetail?.image}>
+              G
+            </Avatar>
+            <div className="profile-name-container">
+              <p>{userDetail?.name || "Guest User"}</p>
+              <small>{userDetail?.email || "Click To Login"}</small>
+            </div>
+          </div>
+
+          <FullScreenToolTip />
+          {isMobile && <SwipeInfo />}
         </>
       )}
+
+      <Info open={infoOpen} setOpen={setInfoOpen} />
     </div>
   );
 };
 export default RotateScreen;
+
+
