@@ -3,7 +3,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 15;
+  z-index: 150000;
   width: 100vw;
   height: 100vh;
   background-color: rgb(0, 162, 108);

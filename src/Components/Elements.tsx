@@ -1,31 +1,26 @@
-import { useEffect, useLayoutEffect, useState } from "react";
 import "./styles/rotateScreen.css";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 import {
   Avatar,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Grid,
   IconButton,
-  Typography,
 } from "@mui/material";
-import FullscreenIcon from "@mui/icons-material/Fullscreen";
-import MusicOffIcon from '@mui/icons-material/MusicOff';
-import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 
-import SwipeInfo from "./SwipeInfo";
-import FullScreenToolTip from "./FullScreenToolTip";
-import { useGlobalStore } from "../Utils/globalStore";
 import { signInWithPopup } from "firebase/auth";
-import { auth, authProvider } from "../Utils/helpers/firebase";
+import HelpIcon from '@mui/icons-material/Help';
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
+
+import Info from './Info';
+import SwipeInfo from "./SwipeInfo";
 import { useAuth } from "../Utils/userStore";
 import LoadingScreen from "./LoadingScreen";
+import FullScreenToolTip from "./FullScreenToolTip";
+import { useGlobalStore } from "../Utils/globalStore";
+import { auth, authProvider } from "../Utils/helpers/firebase";
 
 const RotateScreen = () => {
   const [show, setShow] = useState<boolean>(true);
+  const [infoOpen, setInfoOpen] = useState<boolean>(false);
 
   const { isMobile } = useGlobalStore();
   const { logInUser, userDetail, isLoggedIn, decodeToken } = useAuth();
@@ -35,7 +30,10 @@ const RotateScreen = () => {
     else setShow(false);
   };
 
-  const toggleFullscreen = () => {
+  const toggleFullscreen = (e:any) => {
+    e.preventDefault();
+    e.stopPropagation();
+
     if (document.fullscreenElement) {
       document.exitFullscreen();
     } else {
@@ -49,7 +47,10 @@ const RotateScreen = () => {
     e.preventDefault();
     e.stopPropagation();
 
-    if (isLoggedIn) return;
+    if (isLoggedIn) {
+      setInfoOpen(true);
+      return;
+    }
 
     signInWithPopup(auth, authProvider)
       .then((data) => {
@@ -59,6 +60,13 @@ const RotateScreen = () => {
       })
       .catch((e) => console.log(e));
   };
+
+  const handleHelpClick = (e:any) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setInfoOpen(true);
+  }
 
   useEffect(() => {
     checkOriantation();
@@ -74,6 +82,7 @@ const RotateScreen = () => {
 
   useLayoutEffect(() => {
     decodeToken();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -88,6 +97,11 @@ const RotateScreen = () => {
           <div className="fullscreen-btn-con">
             <IconButton onClick={toggleFullscreen}>
               <FullscreenIcon sx={{ color: "#fff" }} />
+            </IconButton>
+          </div>
+          <div className="info-btn-con">
+            <IconButton onClick={handleHelpClick}>
+              <HelpIcon sx={{ color: "#fff" }} />
             </IconButton>
           </div>
 
@@ -106,38 +120,10 @@ const RotateScreen = () => {
         </>
       )}
 
-      <Dialog open={false} className="settings_popup">
-        <DialogTitle>Welcome to Framefolio,</DialogTitle>
-        <DialogContent>
-          <Typography>
-            Explore the experience of a 3D world with Framefolio, your gateway
-            to an immersive image gallery! Navigate seamlessly by sliding across
-            the screen or using the joystick controls. To add your personal
-            touch, just click on any image to upload your own pictures.
-            Remember, you'll need to be logged into your Google account for image
-            uploads. Immerse yourself in this interactive environment and make
-            Framefolio uniquely yours!
-          </Typography>
-        </DialogContent>
-        <DialogActions>
-          <Grid container spacing={3} >
-            <Grid item xs={6} display={'flex'} justifyContent={'center'} >
-              <IconButton>
-                <MusicOffIcon/>
-              </IconButton>
-            </Grid>
-            <Grid item xs={6} display={'flex'} justifyContent={'center'}  >
-              <IconButton>
-                <VolumeOffIcon/>
-              </IconButton>
-            </Grid>
-            <Grid item xs={12} >
-              <Button fullWidth variant='contained' >Logout</Button>
-            </Grid>
-          </Grid>
-        </DialogActions>
-      </Dialog>
+      <Info open={infoOpen} setOpen={setInfoOpen} />
     </div>
   );
 };
 export default RotateScreen;
+
+

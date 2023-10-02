@@ -18,10 +18,16 @@
   right: 10px;
 }
 
+.info-btn-con {
+  position: absolute;
+  bottom: 12px;
+  right: 10px;
+}
+
 .settings-btn-con {
   position: absolute;
   top: 12px;
-  left: 10px;
+  right: 10px;
 }
 
 .full-screen-info {

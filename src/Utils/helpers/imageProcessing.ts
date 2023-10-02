@@ -42,7 +42,7 @@ export const getImageBase64 = (file:Blob):Promise<string> => new Promise((resolv
 
 export const uploadImageToFireStorage = (base64:string, i:number) => {
   const num = (i + 1).toString().padStart(3, "0");
-  const imgRef = ref(storageBucket,`private/Image${num}.png`);
+  const imgRef = ref(storageBucket,`public/Image${num}.png`);
 
   getDownloadURL(imgRef).then(() => {
     deleteObject(imgRef).then(()=>{
@@ -60,7 +60,7 @@ export const uploadImageToFireStorage = (base64:string, i:number) => {
 
 export const getAllImages:Promise<string[]> = new Promise((resolve)=>{
   const tempArr:string[] = [];
-  listAll(ref(storageBucket,'private')).then(async(images)=>{
+  listAll(ref(storageBucket,'public')).then(async(images)=>{
     for (const img of images.items) {
       
       const index:number = parseInt(img.name.replace('Image','').replace('.png',''));

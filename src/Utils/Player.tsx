@@ -30,7 +30,7 @@ const Player = () => {
 
     const { left, right, forward, backward } = get()
 
-    if(left || right || forward || backward) {
+    if( left || right || forward || backward ) {
       if(footStepsAudio.paused) {
         footStepsAudio.play();
      }
