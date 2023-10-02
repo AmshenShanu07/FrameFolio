@@ -116,6 +116,15 @@
   margin: 0;
 }
 
+.settings_popup {
+  color: black;
+}
+
+.info_list {
+  font-size: 20px;
+}
+
+
 @keyframes swipe-animation {
   0% {
     opacity: 1;

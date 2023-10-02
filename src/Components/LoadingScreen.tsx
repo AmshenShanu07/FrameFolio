@@ -5,7 +5,7 @@ import { useProgress } from "@react-three/drei";
 
 const LoadingScreen = () => {
   const TOTAL_COUNT = 54
-  const { loaded } = useProgress();
+  const { loaded, progress } = useProgress();
 
   const [hide, setHide] = useState<boolean>(false);
 
@@ -24,11 +24,16 @@ const LoadingScreen = () => {
           <div className="loading-text">rame Folio!</div>
         </div>
         {
-        (loaded >= TOTAL_COUNT && !hide) &&
+        (loaded >= TOTAL_COUNT && !hide)?
         <button
           onClick={onClickExplore}
-          className={`button_exlore ${loaded <= TOTAL_COUNT && 'show_btn'}`}
-          >Explore</button>}
+          className={`button_exlore ${loaded >= TOTAL_COUNT && 'show_btn'}`}
+          >Explore</button>:
+          <p
+            className='loading_txt'
+            hidden={loaded >= TOTAL_COUNT}
+            >Loading...{Math.round(progress)}% <br />{loaded}/{TOTAL_COUNT}</p>
+          }
       </div>
   );
 };

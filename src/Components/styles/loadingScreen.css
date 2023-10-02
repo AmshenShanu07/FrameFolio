@@ -24,7 +24,7 @@
 
 .load-text {
   left: 50%;
-  top: 45%;
+  top: 40%;
   transform: translate(-50%, -50%);
   position: absolute;
   font-size: 10vmax;
@@ -51,12 +51,12 @@
 }
 
 .show_btn {
-  animation: btnFadeIn 1s linear 2s forwards;
+  animation: btnFadeIn 1s linear forwards;
 }
 
 .button_exlore {
   left: 50%;
-  top: 60%;
+  top: 65%;
   transform: translate(-50%, -50%);
   position: absolute;
   background-color: transparent;
@@ -66,8 +66,20 @@
   border-radius: 5px;
   padding: 10px 15px;
   font-size: 18px;
-  opacity: 0;
-  
+  opacity: 0; 
+}
+
+.loading_txt {
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  background-color: transparent;
+  color: white;
+  outline: none;
+  border-radius: 5px;
+  font-size: 18px;
+  text-align: center;
 }
 
 .button_exlore:hover {
