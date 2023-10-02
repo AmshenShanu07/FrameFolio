@@ -2,20 +2,33 @@ import { useState } from 'react';
 import "./styles/loadingScreen.css";
 
 import { useProgress } from "@react-three/drei";
+// import { useGlobalStore } from '../Utils/globalStore';
 
 const LoadingScreen = () => {
   const TOTAL_COUNT = 54
   const { loaded, progress } = useProgress();
+  // const { mute } = useGlobalStore()
 
   const [hide, setHide] = useState<boolean>(false);
 
+  const audio = new Audio('sounds/forest.mp3');
+
   const onClickExplore = (e:any) => {
     e.stopPropagation();
-    const audio = new Audio('sounds/forest.mp3');
     audio.loop = true;
     audio.play();
     setHide(true)
   }
+
+  // useLayoutEffect(()=>{
+  //   console.log(mute);
+    
+  //   if(mute)
+  //     audio.pause()
+  //   else
+  //     audio.play()
+
+  // },[audio, mute])
 
   return (
       <div className={`loader  ${hide && 'hide_loading'}`}  >

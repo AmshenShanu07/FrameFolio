@@ -1,6 +1,8 @@
 import { deleteObject, getDownloadURL, listAll, ref, uploadString } from 'firebase/storage';
 import { storageBucket } from './firebase';
 
+const bucketName = window.location.href.includes('#amshen07')?'private':'public'
+
 export const getImageBase64 = (file:Blob):Promise<string> => new Promise((resolve)=>{
   const reader = new FileReader();
   const img = new Image();
@@ -42,7 +44,7 @@ export const getImageBase64 = (file:Blob):Promise<string> => new Promise((resolv
 
 export const uploadImageToFireStorage = (base64:string, i:number) => {
   const num = (i + 1).toString().padStart(3, "0");
-  const imgRef = ref(storageBucket,`public/Image${num}.png`);
+  const imgRef = ref(storageBucket,`${bucketName}/Image${num}.png`);
 
   getDownloadURL(imgRef).then(() => {
     deleteObject(imgRef).then(()=>{
@@ -59,8 +61,11 @@ export const uploadImageToFireStorage = (base64:string, i:number) => {
 }
 
 export const getAllImages:Promise<string[]> = new Promise((resolve)=>{
+  console.log(bucketName);
+  
+
   const tempArr:string[] = [];
-  listAll(ref(storageBucket,'public')).then(async(images)=>{
+  listAll(ref(storageBucket,`${bucketName}`)).then(async(images)=>{
     for (const img of images.items) {
       
       const index:number = parseInt(img.name.replace('Image','').replace('.png',''));
