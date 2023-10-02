@@ -11,9 +11,10 @@ import {
   DialogActions,
 } from "@mui/material";
 import MusicOffIcon from '@mui/icons-material/MusicOff';
-import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import CloseIcon from '@mui/icons-material/Close';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import { useAuth } from '../Utils/userStore';
+import { useGlobalStore } from '../Utils/globalStore';
 
 
 interface InfoProps {
@@ -23,6 +24,7 @@ interface InfoProps {
 
 const Info = ({ open, setOpen }:InfoProps) => {
   const { logOutUser, isLoggedIn } = useAuth();
+  const { mute, setMute } = useGlobalStore()
 
   const onClickCloseBtn = (e:any) => {
     e.preventDefault();
@@ -37,6 +39,13 @@ const Info = ({ open, setOpen }:InfoProps) => {
 
     logOutUser();
     setOpen(false);
+  }
+
+  const onClickMute = (e:any) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setMute(!mute);
   }
 
 
@@ -62,15 +71,15 @@ const Info = ({ open, setOpen }:InfoProps) => {
         <DialogActions>
           <Grid container spacing={3} >
             <Grid item xs={6} display={'flex'} justifyContent={'center'} >
-              <IconButton>
-                <MusicOffIcon/>
+              <IconButton onClick={onClickMute} >
+                {mute?<MusicOffIcon/>:<MusicNoteIcon/>}
               </IconButton>
             </Grid>
-            <Grid item xs={6} display={'flex'} justifyContent={'center'}  >
+            {/* <Grid item xs={6} display={'flex'} justifyContent={'center'}  >
               <IconButton>
                 <VolumeOffIcon/>
               </IconButton>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} >
               {isLoggedIn &&
                 <Button
