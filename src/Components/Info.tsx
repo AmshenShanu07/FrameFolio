@@ -11,7 +11,6 @@ import {
   DialogActions,
 } from "@mui/material";
 import MusicOffIcon from '@mui/icons-material/MusicOff';
-import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import CloseIcon from '@mui/icons-material/Close';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import { useAuth } from '../Utils/userStore';
