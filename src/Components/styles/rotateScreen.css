@@ -1,0 +1,148 @@
+.rotate-screen-container {
+  z-index: 11;
+  background: rgb(0, 0, 0);
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  color: #fffefe;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fullscreen-btn-con {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+}
+
+.settings-btn-con {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+}
+
+.full-screen-info {
+  color: #fffefe;
+  position: absolute;
+  top: 12px;
+  right: 50px;
+  padding: 10px 10px;
+
+  background: rgb(55, 165, 255);
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  opacity: 0;
+  animation: fade 10s ease-in;
+}
+
+.full-screen-info ::before {
+  content: "";
+  position: absolute;
+  height: 10px;
+  width: 10px;
+
+  top: 11px;
+  right: -6px;
+  transform: rotate(45deg);
+
+  background: rgb(55, 165, 255);
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-top: 1px solid rgba( 255, 255, 255, 0.18 );
+
+}
+
+.swipe-info {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  color: #fffefe;
+  animation: swipe-hide 10s ease;
+  opacity: 0;
+  /* animation-delay: 7s; */
+}
+
+.x-hand {
+  color:#fffefe;
+  height:100px;
+  left:calc(50% - 22px);
+  opacity:.8;
+  position:absolute;
+  top:calc(50% - 5px);
+  transform-origin:bottom;
+  width:100px;
+}
+
+.x-swipe-msg{
+  position: absolute;
+  top: 45%;
+  left : calc(50% - 22px);;
+  
+}
+
+.x-swipe-indicator {
+  position: absolute;
+  top: 40%;
+  width: 100px;
+  opacity: 0;
+  animation: swipe-animation 5s linear 3;
+}
+
+.profile_menu {
+  position: absolute;
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profile-name-container {
+  color: white;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-name-container p {
+  font-size: 16px;
+  margin: 0;
+}
+
+@keyframes swipe-animation {
+  0% {
+    opacity: 1;
+    left: 30%;
+    border-color: #bbb;
+  }
+  50% {
+    left: 60%;
+  }
+  100% {
+    opacity: 1;
+    left: 30%;
+  }
+}
+
+@keyframes swipe-hide {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+@keyframes fade {
+  0% { opacity: 1 }
+  90% { opacity: 1 }
+  100% { opacity: 0 }
+}

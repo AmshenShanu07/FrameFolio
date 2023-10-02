@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css?family=Staatliches');
+.loading_container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 15;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(0, 162, 108);
+  font-family: 'Staatliches', cursive;
+  color: red;
+}
+
+.loader {
+  position: absolute;
+  z-index: 15;
+  left: 0;
+  top: 0;
+  background: white;
+  width: 100%;
+  height: 100vh;
+  animation: backgroundChange .5s linear 3s forwards;
+}
+
+.load-text {
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  font-size: 10vmax;
+  width: fit-content;
+  display: flex;
+  animation: colorChange .5s linear 3s forwards;
+}
+
+.loaded-text {
+  transform: scale(1.5);
+  animation: scaleText .5s linear .5s forwards;
+}
+
+.loading-text {
+  width: 0;
+  overflow: hidden;
+  animation: expand 1s linear 1.5s forwards;
+  white-space: nowrap;
+}
+
+.hide_loading {
+  background-color: black;
+  animation: hideLoading 1s linear 1s forwards;
+}
+
+.show_btn {
+  animation: btnFadeIn 1s linear 2s forwards;
+}
+
+.button_exlore {
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  background-color: transparent;
+  color: white;
+  outline: none;
+  border: 1px white solid;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 18px;
+  opacity: 0;
+  
+}
+
+.button_exlore:hover {
+  border: none;
+  background-color: rgb(255, 255, 255);
+  color: black;
+}
+
+@keyframes scaleText {
+  0% {transform: scale(1.5)}
+  100% {transform: scale(1)}
+}
+
+@keyframes expand {
+  from {width: 0;}
+  to {width: 50vmax;}
+}
+
+@keyframes backgroundChange {
+  from {background-color: white}
+  to {background-color: black}
+}
+
+@keyframes colorChange {
+  from {color: black}
+  to {color: white}
+}
+
+@keyframes fadeOut {
+  from {opacity: 1}
+  to {
+    opacity: 0; 
+    z-index: 0;
+  }
+}
+
+@keyframes btnFadeIn{
+  from {opacity: 0}
+  to { opacity: 1}
+}
+
+@keyframes hideLoading {
+  from {opacity: 1}
+  to { opacity: 0; display: none;}
+}

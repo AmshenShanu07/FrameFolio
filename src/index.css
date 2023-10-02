@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Roboto:ital,wght@0,400;1,300&display=swap');
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+body {
+  margin: 0;
+  font-size: 12px;
+  font-family: 'Audiowide', cursive;
+  font-family: 'Roboto', sans-serif;
+}
+
+.dot {
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  transform: rotate(45deg);
+  position: absolute;
+  background-color: white;
+}
+
+canvas {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow-y: hidden;
+  touch-action: none;
+}
+
+.joystick-con {
+  z-index: 10;
+  position: absolute;
+  bottom: 10%;
+  left: 10%;
+}
