@@ -91,7 +91,7 @@ const RotateScreen = () => {
         <div className="rotate-screen-container">
           <p>Please Rotate Your Screen*</p>
         </div>
-      ) : (
+      ) : <></>}
         <>
           <LoadingScreen/>
           <div className="fullscreen-btn-con">
@@ -118,7 +118,6 @@ const RotateScreen = () => {
           <FullScreenToolTip />
           {isMobile && <SwipeInfo />}
         </>
-      )}
 
       <Info open={infoOpen} setOpen={setInfoOpen} />
     </div>

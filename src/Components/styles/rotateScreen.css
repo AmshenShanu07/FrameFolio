@@ -10,20 +10,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 100000000;
 }
 
 .fullscreen-btn-con {
   position: absolute;
   top: 12px;
   right: 10px;
-  z-index: 100;
+  /* z-index: 100; */
 }
 
 .info-btn-con {
   position: absolute;
   bottom: 12px;
   right: 10px;
-  z-index: 100;
+  /* z-index: 100; */
 }
 
 .settings-btn-con {

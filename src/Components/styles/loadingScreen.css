@@ -3,7 +3,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 150000;
+  z-index: 15000;
   width: 100vw;
   height: 100vh;
   background-color: rgb(0, 162, 108);
@@ -13,7 +13,7 @@
 
 .loader {
   position: absolute;
-  z-index: 15;
+  z-index: 1500;
   left: 0;
   top: 0;
   background: white;
@@ -123,5 +123,5 @@
 
 @keyframes hideLoading {
   from {opacity: 1}
-  to { opacity: 0; display: none;}
+  to { opacity: 0; display: none; z-index: -10;}
 }
