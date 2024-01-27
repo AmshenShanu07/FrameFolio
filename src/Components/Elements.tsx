@@ -124,6 +124,5 @@ const RotateScreen = () => {
     </div>
   );
 };
+
 export default RotateScreen;
-
-

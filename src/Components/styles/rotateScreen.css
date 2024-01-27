@@ -16,12 +16,14 @@
   position: absolute;
   top: 12px;
   right: 10px;
+  z-index: 100;
 }
 
 .info-btn-con {
   position: absolute;
   bottom: 12px;
   right: 10px;
+  z-index: 100;
 }
 
 .settings-btn-con {
@@ -108,6 +110,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  z-index: 100;
 }
 
 .profile-name-container {
