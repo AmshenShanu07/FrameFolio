@@ -28,4 +28,4 @@ const storageBucket = getStorage(firebase);
 const auth = getAuth(firebase);
 const authProvider = new  GoogleAuthProvider();
 
-export  {storageBucket, auth, authProvider};
+export  { storageBucket, auth, authProvider };
