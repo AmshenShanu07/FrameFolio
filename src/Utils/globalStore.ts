@@ -15,8 +15,8 @@ export const useGlobalStore = create<MovementStoreI>((set)=>({
   x:0,
   y:0,
   mute:false,
-  // isMobile:('ontouchstart' in document.documentElement),
-  isMobile: true,
+  isMobile:('ontouchstart' in document.documentElement),
+  // isMobile: true,
   setMute:(val)=>set(()=>({mute:val})),
   setPosition:(pos:any)=> set(() => ({x:pos.x, y:pos.y}) ),
   stopMovement:()=>set(()=>({x:0,y:0}))

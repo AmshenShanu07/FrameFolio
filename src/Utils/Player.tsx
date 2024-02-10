@@ -41,7 +41,7 @@ const Player = () => {
     bodyRef.current.getWorldPosition(camera.position);
     bodyRef.current.rotation.set(0,0,0);
     bodyPhyRef.current.setRotation(quat({x:0,y:0,z:0,w:0}),true);
-    camera.position.y += 4;
+    camera.position.y += 5;
 
 
 
