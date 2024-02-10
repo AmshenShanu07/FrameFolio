@@ -27,7 +27,7 @@ const App = () => {
   return (
     <>
       <Canvas shadows>
-        <Environment
+        {/* <Environment
           background
           files={[
             'env/px.png', 
@@ -37,7 +37,8 @@ const App = () => {
             'env/pz.png',
             'env/nz.png'
           ]}
-        />
+        /> */}
+        <Environment background preset='night' blur={0.5} />
         <ambientLight intensity={1.5} />
 
         <Suspense fallback={null} >

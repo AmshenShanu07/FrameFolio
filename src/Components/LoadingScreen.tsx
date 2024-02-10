@@ -5,7 +5,7 @@ import { useProgress } from "@react-three/drei";
 // import { useGlobalStore } from '../Utils/globalStore';
 
 const LoadingScreen = () => {
-  const TOTAL_COUNT = 54
+  const TOTAL_COUNT = 49
   const { loaded, progress } = useProgress();
   // const { mute } = useGlobalStore()
 
